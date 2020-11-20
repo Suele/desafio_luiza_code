@@ -3,16 +3,19 @@ from django.http import HttpResponse
 from . models import Produto
 from django.views.generic import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from . forms import CadastraProduto
 from django.shortcuts import get_object_or_404,redirect
+from django.contrib.auth.decorators import login_required
 
-
-
-
+@login_required(login_url='/login/')
 def index(request):
     produtos = Produto.objects.all()
     listaProdutos = Produto.objects.all()
     search = request.GET.get('search')
+    print(request.user)
     if search:
         produtos = produtos.filter(prod_nome__icontains=search)
 
@@ -70,3 +73,26 @@ def luMarketplace_ativar(request, id_prod):
     listaProdutos = Produto.objects.all()
     context = {'produtos': produtos, 'listaProdutos': listaProdutos}
     return render(request, 'lu_marketplace/index.html', context)
+
+def login_user(request):
+    return render(request, 'login.html')
+
+
+@csrf_protect
+def submit_login(request):
+    if request.POST:
+        user=request.POST.get('user')
+        senha=request.POST.get('senha')
+        user = authenticate(username=user, password = senha)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            messages.error(request, "Usuário/Senha incorretas, favor tentar novamente")
+    return redirect('/login/')
+
+
+def logout_user(request):
+    logout(request)
+    print(request.user)
+    return redirect('/login/')
