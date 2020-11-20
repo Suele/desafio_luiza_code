@@ -61,7 +61,7 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'lu_marketplace', 'templates', 'lu_marketplace'), ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'lu_marketplace', 'templates', 'lu_marketplace'), os.path.join(BASE_DIR, 'lu_marketplace', 'templates', 'registration'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,6 +73,9 @@ TEMPLATES = [
         },
     },
 ]
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'luiza_code.wsgi.application'
 
@@ -125,3 +128,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
