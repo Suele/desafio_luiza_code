@@ -16,4 +16,5 @@ urlpatterns = [
     path('luMarketplace_inativar/<id_prod>', views.luMarketplace_inativar, name='luMarketplace-inativar'),
     
     path('luMarketplace_ativar/<id_prod>', views.luMarketplace_ativar, name='luMarketplace-ativar'),
+
 ]
