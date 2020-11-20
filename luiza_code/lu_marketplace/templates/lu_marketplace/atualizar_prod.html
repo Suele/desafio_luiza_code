@@ -12,14 +12,12 @@
 -->
 
 <div class="form-group">
-
   <form method="post" class="col-lg-6 offset-lg-3" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}   
-    <button type="submit" class="btn btn-success">Atualizar</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-outline-success">Atualizar</button>
   </form>
-
-
 </div>
+
 
 {% endblock %}
