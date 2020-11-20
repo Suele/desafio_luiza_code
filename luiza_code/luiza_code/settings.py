@@ -75,7 +75,7 @@ TEMPLATES = [
 ]
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/account/list/'
+LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'luiza_code.wsgi.application'
 
@@ -126,7 +126,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-STATIC_ROOT = '/static/'
+
 STATIC_URL = '/static/'
 
 
