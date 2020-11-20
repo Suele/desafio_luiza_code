@@ -53,8 +53,7 @@
                 <td class="inativo"> {{produto.prod_qtd}} </td>
                 <td class="inativo"> Inativo</td>                             
                 <td class="inativo"> {{produto.vend_id}} </td> 
-                <td class="inativo"><form class="form-inline my-2 my-lg-0" method="GET">
-                    <a href="{% url 'luMarketplace-atualizar' %}">
+                <td class="inativo"><a href="{% url 'luMarketplace-atualizar' produto.prod_codigo %}">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="button">Atualizar</button>
                 </form>
                 </td>
@@ -75,7 +74,7 @@
                 <td> Ativo</td>                             
                 <td> {{produto.vend_id}} </td> 
                 <td><form class="form-inline my-2 my-lg-0" method="GET">
-                    <a href="{% url 'luMarketplace-atualizar' %}">
+                    <a href="{% url 'luMarketplace-atualizar' produto.prod_codigo %}">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="button">Atualizar</button>
                   </form>
                 </td>

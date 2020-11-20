@@ -1,11 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from . models import Produto
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 def index(request):
@@ -16,11 +14,11 @@ def index(request):
         produtos = produtos.filter(prod_nome__icontains=search)
 
     context = {'produtos': produtos, 'listaProdutos': listaProdutos}
-    return render(request, 'lu_marketplace/buscar_prod.html', context)
+    return render(request, 'lu_marketplace/index.html', context)
 
 
 
-class CadastrarProduto(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class CadastrarProduto(SuccessMessageMixin, CreateView):
     model = Produto
     template_name = 'cadastrar_prod.html'
     fields = '__all__'
@@ -28,8 +26,7 @@ class CadastrarProduto(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def get_success_url(self):  
         return '/'
 
-
-class AtualizarProduto(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class AtualizarProduto(SuccessMessageMixin, CreateView):
     model = Produto
     template_name = 'atualizar_prod.html'
     fields = '__all__'
@@ -44,7 +41,6 @@ def luMarketplace_deletar(request, id_prod):
     context = {'produtos': produtos, 'listaProdutos': listaProdutos}
     return render(request, 'lu_marketplace/index.html', context)
 
-@login_required
 def luMarketplace_inativar(request, id_prod):
     Produto.objects.filter(prod_codigo=id_prod).update(prod_inativo=True)
     produtos = Produto.objects.all()
@@ -52,7 +48,6 @@ def luMarketplace_inativar(request, id_prod):
     context = {'produtos': produtos, 'listaProdutos': listaProdutos}
     return render(request, 'lu_marketplace/index.html', context)
 
-@login_required
 def luMarketplace_ativar(request, id_prod):
     Produto.objects.filter(prod_codigo=id_prod).update(prod_inativo=False)
     produtos = Produto.objects.all()
