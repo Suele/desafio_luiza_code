@@ -13,6 +13,7 @@ urlpatterns = [
     path('atualizar-prod/<int:id>', views.luMarketplace_atualizar,
          name='luMarketplace-atualizar'),
 
+
     path('luMarketplace_inativar/<id_prod>',
          views.luMarketplace_inativar, name='luMarketplace-inativar'),
 
