@@ -11,27 +11,44 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 
-@login_required(login_url='/login/')
+
 def index(request):
     produtos = Produto.objects.all()
     listaProdutos = Produto.objects.all()
     search = request.GET.get('search')
-    print(request.user)
+    if (not request.user.is_anonymous):
+        vendedor= request.user
+        produtos=produtos.filter(vend_id=vendedor)  
+        context = {'produtos': produtos, 'listaProdutos': listaProdutos}
+        return render(request, 'area_do_vendedor.html', context)
+
     if search:
-        produtos = produtos.filter(prod_nome__icontains=search)
+        produtos = Produto.objects.filter(prod_nome__icontains=search) 
 
     context = {'produtos': produtos, 'listaProdutos': listaProdutos}
     return render(request, 'lu_marketplace/index.html', context)
 
+@login_required(login_url='/login/')
+def index_logado(request):
+    produtos = Produto.objects.all()
+    listaProdutos = Produto.objects.all()
+    search = request.GET.get('search')
+    vendedor= request.user
+    if search:
+        produtos = Produto.objects.filter(prod_nome__icontains=search)
+    produtos=produtos.filter(vend_id=vendedor)   
+
+    context = {'produtos': produtos, 'listaProdutos': listaProdutos}
+    return render(request, 'area_do_vendedor.html', context)
 
 class CadastrarProduto(SuccessMessageMixin, CreateView):
     model = Produto
     template_name = 'cadastrar_prod.html'
     fields = '__all__'
     success_message = 'Produto cadastrado com sucesso!'
-
     def get_success_url(self):
-        return '/'
+        return '../area_do_vendedor/'
+
 
 
 def luMarketplace_atualizar(request, id):
@@ -56,28 +73,33 @@ def luMarketplace_atualizar(request, id):
         return render(request, 'atualizar_prod.html', {'form': form, 'p': p})
 
 
-def luMarketplace_detalhar(request, id_prod):
-    Produto.objects.filter(prod_codigo=id_prod)
+def luMarketplace_deletar(request, id_prod):
+    Produto.objects.filter(prod_codigo=id_prod).delete()
     produtos = Produto.objects.all()
     listaProdutos = Produto.objects.all()
+    vendedor= request.user
+    produtos=produtos.filter(vend_id=vendedor)  
     context = {'produtos': produtos, 'listaProdutos': listaProdutos}
-    return render(request, 'lu_marketplace/detalhes.html', context)
-
+    return render(request, 'area_do_vendedor.html', context)
 
 def luMarketplace_inativar(request, id_prod):
     Produto.objects.filter(prod_codigo=id_prod).update(prod_inativo=True)
     produtos = Produto.objects.all()
     listaProdutos = Produto.objects.all()
+    vendedor= request.user
+    produtos=produtos.filter(vend_id=vendedor)  
     context = {'produtos': produtos, 'listaProdutos': listaProdutos}
-    return render(request, 'lu_marketplace/index.html', context)
+    return render(request, 'area_do_vendedor.html', context)
 
 
 def luMarketplace_ativar(request, id_prod):
     Produto.objects.filter(prod_codigo=id_prod).update(prod_inativo=False)
     produtos = Produto.objects.all()
     listaProdutos = Produto.objects.all()
+    vendedor= request.user
+    produtos=produtos.filter(vend_id=vendedor)  
     context = {'produtos': produtos, 'listaProdutos': listaProdutos}
-    return render(request, 'lu_marketplace/index.html', context)
+    return render(request, 'area_do_vendedor.html', context)
 
 
 def login_user(request):
@@ -92,7 +114,7 @@ def submit_login(request):
         user = authenticate(username=user, password=senha)
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return redirect('../area_do_vendedor/')
         else:
             messages.error(
                 request, "Usuário/Senha incorretas, favor tentar novamente")
@@ -102,4 +124,4 @@ def submit_login(request):
 def logout_user(request):
     logout(request)
     print(request.user)
-    return redirect('/login/')
+    return redirect('/')

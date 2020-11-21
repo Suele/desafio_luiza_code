@@ -29,9 +29,6 @@
                     <th scope="col">Quantidade</th>
                     <th scope="col">Status</th>
                     <th scope="col">Vendedor</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>            
             </thead>
 
@@ -45,27 +42,7 @@
             </td>
 
             <tbody>
-                {% if produto.prod_inativo %}
-                <td class="inativo"> {{produto.prod_codigo}} </td>
-                <td class="inativo"> {{produto.prod_nome}} </td>
-                <td class="inativo"> {{produto.prod_descricao}} </td>
-                <td class="inativo"> {{produto.prod_preco}} </td>
-                <td class="inativo"> {{produto.prod_qtd}} </td>
-                <td class="inativo"> Inativo</td>                             
-                <td class="inativo"> {{produto.vend_id}} </td> 
-                <td class="inativo"><a href="{% url 'luMarketplace-atualizar' produto.prod_codigo %}">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="button">Atualizar</button>
-                </form>
-                </td>
-                <td class="inativo"><a href="{% url 'luMarketplace-ativar' produto.prod_codigo %}">
-                    <button class="btn btn-info my-2 my-sm-0" type="button"> Ativar </button>
-                </a>
-                </td>
-                <td class="inativo"><a href="{% url 'luMarketplace-deletar' produto.prod_codigo %}">
-                  <button class="btn btn-outline-danger my-2 my-sm-0" type="button">Excluir</button>
-                </a>              
-                </td>
-				{% else %}
+                {% if not produto.prod_inativo %}
 				<td> {{produto.prod_codigo}}</td>
                 <td> {{produto.prod_nome}} </td>
                 <td> {{produto.prod_descricao}} </td>
@@ -73,19 +50,6 @@
                 <td> {{produto.prod_qtd}} </td>
                 <td> Ativo</td>                             
                 <td> {{produto.vend_id}} </td> 
-                <td><form class="form-inline my-2 my-lg-0" method="GET">
-                    <a href="{% url 'luMarketplace-atualizar' produto.prod_codigo %}">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="button">Atualizar</button>
-                  </form>
-                </td>
-                <td><a href="{% url 'luMarketplace-inativar' produto.prod_codigo %}">
-                  <button class="btn btn-outline-dark my-2 my-sm-0" type="button">Inativar</button>
-                </a>              
-                </td>
-                <td><a href="{% url 'luMarketplace-deletar' produto.prod_codigo %}">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="button">Detalhes</button>
-                </a>              
-                </td>
 				{% endif %}
                 
             

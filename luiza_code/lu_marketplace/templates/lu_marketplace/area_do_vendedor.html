@@ -1,0 +1,105 @@
+{% extends 'baselogado.html' %} {% block title %} Cadastro de Produtos {% endblock %}
+
+{% block content %} 
+
+    </br>
+    <h3>Produtos</h3>
+    </br>
+
+    <style>
+        .inativo {
+          color: gray;
+          font-style: italic;
+          background-color: #f0f5f5;
+        }
+    </style>
+
+    <div class="table-responsive">
+        {% if not listaProdutos %}
+            <p>Nenhum produto cadastrado ainda, que tal começar? </p>
+        {% elif produtos %}
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Vendedor</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>            
+            </thead>
+
+            <th scope="row">
+                {% for produto in produtos %}
+                {% endfor %}
+            </th>
+            <td>
+                {% for produto in produtos %}
+
+            </td>
+
+            <tbody>
+                {% if produto.prod_inativo %}
+                <td class="inativo"> {{produto.prod_codigo}} </td>
+                <td class="inativo"> {{produto.prod_nome}} </td>
+                <td class="inativo"> {{produto.prod_descricao}} </td>
+                <td class="inativo"> {{produto.prod_preco}} </td>
+                <td class="inativo"> {{produto.prod_qtd}} </td>
+                <td class="inativo"> Inativo</td>                             
+                <td class="inativo"> {{produto.vend_id}} </td> 
+                <td class="inativo"><a href="{% url 'luMarketplace-atualizar' produto.prod_codigo %}">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="button">Atualizar</button>
+                </form>
+                </td>
+                <td class="inativo"><a href="{% url 'luMarketplace-ativar' produto.prod_codigo %}">
+                    <button class="btn btn-info my-2 my-sm-0" type="button"> Ativar </button>
+                </a>
+                </td>
+                <td class="inativo"><a href="{% url 'luMarketplace-deletar' produto.prod_codigo %}">
+                  <button class="btn btn-outline-danger my-2 my-sm-0" type="button">Excluir</button>
+                </a>              
+                </td>
+				{% else %}
+				<td> {{produto.prod_codigo}}</td>
+                <td> {{produto.prod_nome}} </td>
+                <td> {{produto.prod_descricao}} </td>
+                <td> {{produto.prod_preco}} </td>
+                <td> {{produto.prod_qtd}} </td>
+                <td> Ativo</td>                             
+                <td> {{produto.vend_id}} </td> 
+                <td><form class="form-inline my-2 my-lg-0" method="GET">
+                    <a href="{% url 'luMarketplace-atualizar' produto.prod_codigo %}">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="button">Atualizar</button>
+                  </form>
+                </td>
+                <td><a href="{% url 'luMarketplace-inativar' produto.prod_codigo %}">
+                  <button class="btn btn-outline-dark my-2 my-sm-0" type="button">Inativar</button>
+                </a>              
+                </td>
+                <td><a href="{% url 'luMarketplace-deletar' produto.prod_codigo %}">
+                    <button class="btn btn-outline-danger my-2 my-sm-0" type="button">Excluir</button>
+                </a>              
+                </td>
+				{% endif %}
+                
+            
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+          <p>Nenhum produto cadastrado ainda, que tal começar?  </p>
+        {% endif %}
+
+        
+    </div>
+
+
+        
+
+{% endblock %}
