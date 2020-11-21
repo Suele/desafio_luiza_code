@@ -1,6 +1,13 @@
 {% load static %}
 
 <!DOCTYPE html>
+<style>
+  .guest {
+    color: rgb(51, 87, 153);
+    font-style: italic;
+    display:block;padding:.5rem 1rem
+  }
+</style>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -43,7 +50,9 @@
           </li>
           
         
-
+          <li class="nav-item">
+            <a class="guest ">Bem vindo, {{user.get_username }}</a>
+          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" method="GET">
           <input class="form-control mr-lg-2" id="search" name="search" type="text" placeholder="Digite o nome do produto" aria-label="Buscar">
