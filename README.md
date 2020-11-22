@@ -37,7 +37,7 @@
 * Github: [@victoriasimonetti](https://github.com/victoriasimonetti)
 
 ## Rodando o projeto
-1. Através do seu terminal, baixe o projeto através do comando:
+1. No seu terminal, baixe o projeto através do comando:
   `git clone https://github.com/Suele/desafio_luiza_code.git`
 
 2. Entre na pasta do projeto
@@ -77,7 +77,8 @@
 `python manage.py migrate`
 
 7. Crie seu usuário com poderes de administrador/superusuário:
-  Forneça um nome, email e senha para este usuário
+ `python manage.py createsuperuser`
+   - Forneça um nome, email e senha para este usuário
 
 8. Entre na pasta luiza_code
 `cd luiza_code`
