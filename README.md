@@ -38,33 +38,33 @@
 
 ## Rodando o projeto
 1. Através do seu terminal, baixe o projeto através do comando:
-`git clone https://trello.com/c/4W15ZIMV/34-como-baixar-o-projeto-do-git-passo-a-passo`
+  `git clone https://trello.com/c/4W15ZIMV/34-como-baixar-o-projeto-do-git-passo-a-passo`
 
 2. Entre na pasta do projeto
-`cd desafio_luiza_code`
+  `cd desafio_luiza_code`
 
 3. Crie um ambiente virtual
 
-* No mac/linux:
-`python3 -m venv venv_LuizaCodeDesafioFinal`
+- No mac/linux:
+  `python3 -m venv venv_LuizaCodeDesafioFinal`
 
-* No windows:
-`python -m venv venv_LuizaCodeDesafioFinal`
+- No windows:
+  `python -m venv venv_LuizaCodeDesafioFinal`
 
 4. Ative seu ambiente virtual
 
-* No mac/linux:
+- No mac/linux:
 `source venv_LuizaCodeDesafioFinal`
 
-* No windows:
-- Se você estiver usando o terminal do Windows PowerShell o comando é:
-`venv_LuizaCodeDesafioFinal\Scripts\activate`
+- No windows:
+  - Se você estiver usando o terminal do Windows PowerShell o comando é:
+  `venv_LuizaCodeDesafioFinal\Scripts\activate`
 
-- No CMD:
-`venv_LuizaCodeDesafioFinal\Scripts\activate.bat`
+  - No CMD:
+  `venv_LuizaCodeDesafioFinal\Scripts\activate.bat`
 
-- No terminal do VSCode
-`. myvenv\Scripts\activate.ps1`
+  - No terminal do VSCode
+  `. myvenv\Scripts\activate.ps1`
 
 5. Instale as dependências do projeto
 - No mac/linux:
@@ -77,7 +77,7 @@
 `python manage.py migrate`
 
 7. Crie seu usuário com poderes de administrador/superusuário:
-- Forneça um nome, email e senha para este usuário
+  Forneça um nome, email e senha para este usuário
 
 8. Entre na pasta luiza_code
 `cd luiza_code`
