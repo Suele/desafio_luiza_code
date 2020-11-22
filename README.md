@@ -38,7 +38,7 @@
 
 ## Rodando o projeto
 1. Através do seu terminal, baixe o projeto através do comando:
-  `git clone https://trello.com/c/4W15ZIMV/34-como-baixar-o-projeto-do-git-passo-a-passo`
+  `git clone https://github.com/Suele/desafio_luiza_code.git`
 
 2. Entre na pasta do projeto
   `cd desafio_luiza_code`
